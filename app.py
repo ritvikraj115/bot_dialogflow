@@ -2,6 +2,7 @@ from flask import Flask,request,jsonify
 import requests
 import os
 import logging
+import currencyapicom
 
 
 app= Flask(__name__)
@@ -26,9 +27,10 @@ def index():
     return jsonify(response)
 
 def fetch_conversion_factor(source,target):
-    url="https://free.currconv.com/api/v7/convert?q={}_{}&compact=ultra&apiKey=9f180e999b75dab652a5".format(source,target)
-    response = requests.get(url)
-    response= response.json()
+    client = currencyapicom.Client('cur_live_FJSZpNZ5ykTrusCMNOPlnpeByAGBiVamn0nArCZB')
+    result = client.latest(source,currencies=[target])
+    print(result)
+    response= result.json()
     app.logger.info(response)
 
     return response["{}_{}".format(source,target)]
