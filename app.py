@@ -11,7 +11,7 @@ app= Flask(__name__)
 def index():
     logging.basicConfig(level=logging.INFO)
     data= request.get_json()
-    app.logger.info(data)
+    # app.logger.info(data)
     source_currency= data['queryResult']['parameters']['unit-currency']['currency']
     amount=data['queryResult']['parameters']['unit-currency']['amount']
     target_currency=data['queryResult']['parameters']['currency-name']
@@ -29,9 +29,9 @@ def index():
 def fetch_conversion_factor(source,target):
     client = currencyapicom.Client('cur_live_FJSZpNZ5ykTrusCMNOPlnpeByAGBiVamn0nArCZB')
     result = client.latest(source,currencies=[target])
-    app.logger.info(result)
+    app.logger.info(result['data'][target]['value'])
 
-    return result["{}_{}".format(source,target)]
+    return result['data'][target]['value']
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))  # Use the PORT environment variable or default to 5000
