@@ -29,7 +29,7 @@ def fetch_conversion_factor(source,target):
     response= response.json()
     print(response)
 
-    return response['{}_{}'.format(source,target)]
+    return response['{} {}'.format(source,target)]
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))  # Use the PORT environment variable or default to 5000
