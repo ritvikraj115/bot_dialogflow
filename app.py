@@ -24,12 +24,12 @@ def index():
     return jsonify(response)
 
 def fetch_conversion_factor(source,target):
-    url="https://free.currconv.com/api/v7/convert?q={}_{}&compact=ultra&apiKey=cc34cec85455141c0e4a".format(source,target)
+    url="https://free.currconv.com/api/v7/convert?q={}_{}&compact=ultra&apiKey=9f180e999b75dab652a5".format(source,target)
     response = requests.get(url)
     response= response.json()
     print(response)
 
-    return response['{} {}'.format(source,target)]
+    return response['{}_{}'.format(source,target)]
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))  # Use the PORT environment variable or default to 5000
