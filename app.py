@@ -29,11 +29,9 @@ def index():
 def fetch_conversion_factor(source,target):
     client = currencyapicom.Client('cur_live_FJSZpNZ5ykTrusCMNOPlnpeByAGBiVamn0nArCZB')
     result = client.latest(source,currencies=[target])
-    print(result)
-    response= result.json()
-    app.logger.info(response)
+    app.logger.info(result)
 
-    return response["{}_{}".format(source,target)]
+    return result["{}_{}".format(source,target)]
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))  # Use the PORT environment variable or default to 5000
